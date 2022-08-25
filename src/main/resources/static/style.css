@@ -1,0 +1,31 @@
+.btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.btn {
+    color: white;
+}
+
+.add-to-cart {
+    border: 2px solid darkgreen;
+    width: 40px;
+    background-color: darkgreen;
+
+}
+
+.decrease-product {
+    border: 2px solid darkblue;
+    width: 40px;
+    background-color: darkblue;
+}
+
+.remove-from-cart {
+    border: 2px solid darkred;
+    background-color: darkred;
+}
+
+
+.add-to-cart:hover {
+    border: 2px solid blue;
+}

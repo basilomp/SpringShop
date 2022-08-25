@@ -62,6 +62,22 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             });
     }
 
+    //Метод для уменьшения количества
+    $scope.decreaseProduct = function (productId) {
+        $http.post('http://localhost:8189/app/api/v1/carts/decrease/' + productId, $localStorage.cartName)
+            .then(function (response) {
+                $scope.loadCart();
+            });
+    }
+
+    //Метод для полного удаления позиции из корзины
+    $scope.removeProduct = function (productId) {
+        $http.post('http://localhost:8189/app/api/v1/carts/remove/' + productId, $localStorage.cartName)
+            .then (function (response) {
+                $scope.loadCart();
+            })
+    }
+
     $scope.loadCart = function () {
         $http.post('http://localhost:8189/app/api/v1/carts', $localStorage.cartName)
             .then(function (response) {

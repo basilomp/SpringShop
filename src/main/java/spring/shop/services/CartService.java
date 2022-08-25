@@ -34,6 +34,22 @@ public class CartService {
         }
     }
 
+    public void decreaseProductByIdInCart(Long id, String cartName) {
+        Product product = productsService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Не удалось " +
+                "найти продукт"));
+        Cart cart = getCurrentCart(cartName);
+        cart.decreaseProduct(product.getId());
+        cacheManager.getCache("Cart").put(cartName, cart);
+    }
+
+    public void removeProductFromCart(Long id, String cartName) {
+        Product product = productsService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Не удалось " +
+                "найти продукт"));
+        Cart cart = getCurrentCart(cartName);
+        cart.removeProduct(id);
+        cacheManager.getCache("Cart").put(cartName, cart);
+    }
+
     public void clear(String cartName){
         Cart cart = getCurrentCart(cartName);
         cart.clear();

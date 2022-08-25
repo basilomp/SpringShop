@@ -25,4 +25,17 @@ public class CartController {
     public void clearCart(@RequestBody String cartName) {
         service.getCurrentCart(cartName).clear();
     }
+
+    //Метод для уменьшения количества
+    @PostMapping("/decrease/{id}")
+    public void decreaseProductInCart(@PathVariable Long id, @RequestBody String cartName) {
+        service.decreaseProductByIdInCart(id, cartName);
+    }
+
+    //Метод для полного удаления позиции из корзины
+    @PostMapping("/remove/{id}")
+    public void removeProductFromCart(@PathVariable Long id, @RequestBody String cartName) {
+        service.removeProductFromCart(id, cartName);
+    }
+
 }
