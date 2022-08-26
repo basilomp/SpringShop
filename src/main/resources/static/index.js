@@ -1,4 +1,38 @@
-angular.module('app', ['ngStorage']).controller('indexController', function ($scope, $rootScope, $http, $localStorage) {
+(function () {
+    angular
+        .module('market-front', ['ngRoute', 'ngStorage'])
+        .config(config)
+        .run(run);
+
+    function config($routeProvider) {
+        $routeProvider
+            .when('/store', {
+                templateUrl: 'store/store.html',
+                controller: 'storeController'
+            })
+            .when('/cart', {
+                templateUrl: 'cart/cart.html',
+                controller: 'cartController'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
+    }
+
+    function run($rootScope, $http, $localStorage) {
+        if ($localStorage.springWebUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.springWebUser.token;
+        }
+    }
+})();
+
+
+
+
+
+
+
+angular.module('market-front').controller('indexController', function ($scope, $rootScope, $http, $localStorage) {
     const contextPath = 'http://localhost:8189/app/api/v1';
 
     if(!$localStorage.cartName){
@@ -9,21 +43,6 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.springWebUser.token;
         $localStorage.cartName = "cart_" + $localStorage.springWebUser.username;
     }
-
-
-    $scope.loadProducts = function (pageIndex = 1) {
-        $http({
-            url: contextPath + '/products',
-            method: 'GET',
-            params: {
-                title_part: $scope.filter ? $scope.filter.title_part : null,
-                min_price: $scope.filter ? $scope.filter.min_price : null,
-                max_price: $scope.filter ? $scope.filter.max_price : null
-            }
-        }).then(function (response) {
-            $scope.ProductsPage = response.data;
-        });
-    };
 
     $scope.tryToAuth = function () {
         $http.post('http://localhost:8189/app/auth', $scope.user)
@@ -55,12 +74,12 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         $http.defaults.headers.common.Authorization = '';
     };
 
-    $scope.addToCart = function (productId) {
-        $http.post('http://localhost:8189/app/api/v1/carts/add/' + productId, $localStorage.cartName)
-            .then(function (response) {
-                $scope.loadCart();
-            });
-    }
+    // $scope.addToCart = function (productId) {
+    //     $http.post('http://localhost:8189/app/api/v1/carts/add/' + productId, $localStorage.cartName)
+    //         .then(function (response) {
+    //             $scope.loadCart();
+    //         });
+    // }
 
     //Метод для уменьшения количества
     $scope.decreaseProduct = function (productId) {
@@ -78,19 +97,19 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             })
     }
 
-    $scope.loadCart = function () {
-        $http.post('http://localhost:8189/app/api/v1/carts', $localStorage.cartName)
-            .then(function (response) {
-                $scope.Cart = response.data;
-            });
-    }
-
-    $scope.clearCart = function () {
-        $http.post('http://localhost:8189/app/api/v1/carts/clear', $localStorage.cartName)
-            .then(function (response) {
-                $scope.loadCart();
-            });
-    }
+    // $scope.loadCart = function () {
+    //     $http.post('http://localhost:8189/app/api/v1/carts', $localStorage.cartName)
+    //         .then(function (response) {
+    //             $scope.Cart = response.data;
+    //         });
+    // }
+    //
+    // $scope.clearCart = function () {
+    //     $http.post('http://localhost:8189/app/api/v1/carts/clear', $localStorage.cartName)
+    //         .then(function (response) {
+    //             $scope.loadCart();
+    //         });
+    // }
 
     $rootScope.isUserLoggedIn = function () {
         if ($localStorage.springWebUser) {
@@ -109,5 +128,21 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             });
     }
 
-    $scope.loadProducts();
+    // $scope.checkOut = function () {
+    //     $http.post(contextPath + '/orders' + $scope.orderDetails + $localStorage.cartName)
+    //     .then(function (response) {
+    //         $scope.loadCart();
+    //         $scope.orderDetails = null;
+    //     });
+    // }
+    //
+    //
+    //
+    // $scope.disableCheckOut = function () {
+    //     alert("Для оформления заказа необходимо войти в учетную запись");
+    // }
+
+    // $scope.loadProducts();
+    // $scope.loadCart();
+    // $scope.loadOrders();
 });

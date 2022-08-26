@@ -4,28 +4,28 @@
 }
 
 .btn {
-    color: white;
+    /*color: white;*/
+    text-align: center;
+
 }
 
 .add-to-cart {
     border: 2px solid darkgreen;
     width: 40px;
     background-color: darkgreen;
+    color: white;
 
 }
 
 .decrease-product {
+    color: white;
     border: 2px solid darkblue;
     width: 40px;
     background-color: darkblue;
 }
 
 .remove-from-cart {
+    color: white;
     border: 2px solid darkred;
     background-color: darkred;
-}
-
-
-.add-to-cart:hover {
-    border: 2px solid blue;
 }
