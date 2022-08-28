@@ -25,15 +25,17 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderConverter orderConverter;
 
-    @PostMapping
+//    @PostMapping
+    @PostMapping("/{cartName}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createOrder(Principal principal, @RequestBody OrderDetailsDto orderDetailsDto, String cartName) {
+    public void createOrder(Principal principal, @RequestBody OrderDetailsDto orderDetailsDto,
+                            @PathVariable String cartName) {
         User user = userService.findByUsername(principal.getName()).orElseThrow(() -> new ResourceNotFoundException(
                 "User not found"));
         orderService.createOrder(user, orderDetailsDto, cartName);
     }
 
-    @GetMapping
+    @GetMapping()
     public List<OrderDto> getCurrentOrders(Principal principal) {
         return orderService.findOrderByUsername(principal.getName()).stream().map(orderConverter::entityToDto)
                 .collect(Collectors.toList());
