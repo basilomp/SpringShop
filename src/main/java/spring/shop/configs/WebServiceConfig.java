@@ -26,18 +26,35 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 
     // http://localhost:8189/app/ws/users.wsdl
     @Bean(name = "users")
-    public DefaultWsdl11Definition studentsWsdl11Definition(XsdSchema studentsSchema) {
+    public DefaultWsdl11Definition usersWsdl11Definition(XsdSchema usersSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("UsersPort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("http://www.mvg.com/spring/ws/users");
-        wsdl11Definition.setSchema(studentsSchema);
+        wsdl11Definition.setSchema(usersSchema);
+        return wsdl11Definition;
+    }
+
+
+    @Bean
+    public XsdSchema usersSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("users.xsd"));
+    }
+
+    // http://localhost:8189/app/ws/products.wsdl
+    @Bean(name = "products")
+    public DefaultWsdl11Definition productsWsdl11Definition(XsdSchema productsSchema) {
+        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        wsdl11Definition.setPortTypeName("ProductsPort");
+        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setTargetNamespace("http://www.mvg.com/spring/ws/products");
+        wsdl11Definition.setSchema(productsSchema);
         return wsdl11Definition;
     }
 
     @Bean
-    public XsdSchema studentsSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("users.xsd"));
+    public XsdSchema productsSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("products.xsd"));
     }
 
 

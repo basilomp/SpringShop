@@ -12,6 +12,7 @@ import spring.shop.exceptions.ResourceNotFoundException;
 import spring.shop.repositories.ProductsRepository;
 import spring.shop.repositories.specifications.ProductsSpecifications;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +34,10 @@ public class ProductsService {
         }
 
         return productsRepository.findAll(spec, PageRequest.of(page - 1, 50));
+    }
+
+    public List<Product> allProductsToList() {
+        return productsRepository.findAll();
     }
 
     public Optional<Product> findById(Long id) {
