@@ -1,14 +1,11 @@
-package spring.shop;
+package auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-@EnableCaching
-public class ShopApplication {
+public class AuthApp {
     public static void main(String[] args) {
-        SpringApplication.run(ShopApplication.class, args);
+        SpringApplication.run(AuthApp.class, args);
     }
-
 }

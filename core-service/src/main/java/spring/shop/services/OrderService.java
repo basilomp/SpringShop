@@ -2,6 +2,7 @@ package spring.shop.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import spring.shop.dto.Cart;
 import spring.shop.dto.OrderDetailsDto;
 import spring.shop.entities.Order;
@@ -9,6 +10,7 @@ import spring.shop.entities.OrderItem;
 import spring.shop.exceptions.ResourceNotFoundException;
 import spring.shop.repositories.OrderRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,13 +19,13 @@ import java.util.stream.Collectors;
 public class OrderService {
 
     private final ProductsService productsService;
-
     private final OrderRepository orderRepository;
-    private final CartService cartService;
+    private final RestTemplate cartTemplate;
 
     public void createOrder(String username, OrderDetailsDto orderDetailsDto, String cartName) {
-        Cart currentCart = cartService.getCurrentCart(cartName);
         Order order = new Order();
+        Cart currentCart = cartTemplate.postForObject("http://localhost:8187/web-market-cart/api/v1/carts", cartName,
+                Cart.class);
         order.setAddress(orderDetailsDto.getAddress());
         order.setPhone(orderDetailsDto.getPhone());
         order.setUsername(username);
@@ -40,6 +42,13 @@ public class OrderService {
         orderRepository.save(order);
         currentCart.clear();
 
+    }
+    public List<Order> findOrdersByUsername(String username) {
+        try {
+            return orderRepository.findByUsername(username);
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
     }
 
     public List<Order> findOrderByUsername(String username) {

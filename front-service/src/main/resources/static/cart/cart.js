@@ -2,14 +2,14 @@ angular.module('market-front').controller('cartController', function ($scope, $r
     const contextPath = 'http://localhost:5555/gateway/api/v1';
 
     $scope.loadCart = function () {
-        $http.post('http://localhost:5555/gateway/api/v1/carts', $localStorage.cartName)
+        $http.post('http://localhost:5555/cart/api/v1/carts', $localStorage.cartName)
             .then(function (response) {
                 $scope.Cart = response.data;
             });
     }
 
     $scope.clearCart = function () {
-        $http.post('http://localhost:5555/gateway/api/v1/carts/clear', $localStorage.cartName)
+        $http.post('http://localhost:5555/cart/api/v1/carts/clear', $localStorage.cartName)
             .then(function (response) {
                 $scope.loadCart();
             });

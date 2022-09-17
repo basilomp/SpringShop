@@ -1,9 +1,10 @@
-package spring.shop.controllers;
+package cart.controllers;
 
+import cart.dto.Cart;
+import cart.services.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import spring.shop.dto.Cart;
-import spring.shop.services.CartService;
+
 
 @RestController
 @RequestMapping("/api/v1/carts")

@@ -1,4 +1,4 @@
-package spring.shop.dto;
+package cart.dto;
 
 import lombok.Data;
 
@@ -12,5 +12,5 @@ public class OrderDto {
     private Integer totalPrice;
     private String address;
     private String phone;
-}
 
+}

@@ -1,14 +1,18 @@
-package spring.shop.services;
+package cart.services;
 
+import cart.dto.Cart;
+import cart.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import spring.shop.dto.Cart;
+import org.springframework.web.client.RestTemplate;
 import spring.shop.entities.Product;
 import spring.shop.exceptions.ResourceNotFoundException;
+import spring.shop.services.ProductsService;
+
 
 import java.util.Optional;
 
@@ -17,9 +21,11 @@ import java.util.Optional;
 public class CartService {
     private final ProductsService productsService;
     private final CacheManager cacheManager;
+    private final RestTemplate restTemplate;
 
     @Value("Cart")
     private String CACHE_CART;
+
     private Cart cart;
 
     @Cacheable(value = "Cart", key = "#cartName")
@@ -36,8 +42,10 @@ public class CartService {
     public Cart addProductByIdToCart(Long id, String cartName){
         Cart cart = getCurrentCart(cartName);
         if(!cart.addProductCount(id)) {
-            Product product = productsService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Не удалось найти продукт"));
-            cart.addProduct(product);
+            ProductDto productDto = restTemplate.getForObject("http://localhost:8189/web-market-core/api/v1/products" +
+                    "/" + id, ProductDto.class);
+            cart.addProduct(productDto);
+
         }
         return cart;
     }
