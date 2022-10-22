@@ -120,6 +120,19 @@
             <artifactId>wsdl4j</artifactId>
             <version>1.6.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jaxb2-maven-plugin</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>4.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -143,11 +156,11 @@
                 </executions>
                 <configuration>
                     <sources>
-                        <source>${project.basedir}/src/main/resources/users.xsd</source>
+                        <source>${project.basedir}/src/main/resources/products.xsd</source>
                     </sources>
-<!--                    <packageName>soap</packageName>-->
-<!--                    <outputDirectory>${project.basedir}/src/main/java/spring/soap</outputDirectory>-->
-<!--                    <clearOutputDir>false</clearOutputDir>-->
+                    <packageName>soap</packageName>
+                    <outputDirectory>${project.basedir}/src/main/java/spring/soap</outputDirectory>
+                    <clearOutputDir>false</clearOutputDir>
                 </configuration>
             </plugin>
         </plugins>
