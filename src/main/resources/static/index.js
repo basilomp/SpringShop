@@ -30,16 +30,10 @@
     }
 })();
 
-
-
-
-
-
-
 angular.module('market-front').controller('indexController', function ($scope, $rootScope, $http, $localStorage) {
     const contextPath = 'http://localhost:8189/app/api/v1';
 
-    if(!$localStorage.cartName){
+    if (!$localStorage.cartName) {
         $localStorage.cartName = "cart_" + (Math.random() * 100);
     }
 
@@ -96,7 +90,7 @@ angular.module('market-front').controller('indexController', function ($scope, $
     //Метод для полного удаления позиции из корзины
     $scope.removeProduct = function (productId) {
         $http.post('http://localhost:8189/app/api/v1/carts/remove/' + productId, $localStorage.cartName)
-            .then (function (response) {
+            .then(function (response) {
                 $scope.loadCart();
             })
     }
