@@ -19,3 +19,4 @@ VALUES ('Chocolate bar', 99),
        ('Bread', 84),
        ('Focaccia', 159),
        ('Oat milk', 159);
+

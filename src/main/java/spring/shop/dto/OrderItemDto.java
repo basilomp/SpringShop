@@ -1,9 +1,11 @@
 package spring.shop.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import spring.shop.entities.Product;
 
 @Data
+@AllArgsConstructor
 public class OrderItemDto {
 
     private Long productId;
