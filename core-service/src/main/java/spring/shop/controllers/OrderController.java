@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import spring.shop.converters.OrderConverter;
 import spring.shop.dto.OrderDetailsDto;
 import spring.shop.dto.OrderDto;
-import spring.shop.exceptions.ResourceNotFoundException;
 import spring.shop.services.OrderService;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,9 +25,9 @@ public class OrderController {
         orderService.createOrder(username, orderDetailsDto, cartName);
     }
 
-    @GetMapping()
-    public List<OrderDto> getCurrentOrders(@RequestHeader String username) {
-        return orderService.findOrderByUsername(username).stream().map(orderConverter::entityToDto)
-                .collect(Collectors.toList());
+    @GetMapping
+    public List<OrderDto> getCurrenUrders(@RequestHeader String username){
+        return orderService.findOrdersByUsername(username).stream()
+                .map(orderConverter::entityToDto).collect(Collectors.toList());
     }
 }

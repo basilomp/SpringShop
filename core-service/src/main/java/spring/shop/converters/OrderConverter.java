@@ -1,7 +1,6 @@
 package spring.shop.converters;
 
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Component;
 import spring.shop.dto.OrderDto;
 import spring.shop.entities.Order;
