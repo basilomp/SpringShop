@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 @EnableCaching
 public class ShopApplication {
-
+//decrease, remove
     public static void main(String[] args) {
         SpringApplication.run(ShopApplication.class, args);
     }

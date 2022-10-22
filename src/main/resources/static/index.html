@@ -13,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
     <script src="index.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
@@ -68,6 +69,7 @@
             <td>ID</td>
             <td>Название</td>
             <td>Цена</td>
+            <td>Действия</td>
         </tr>
         <tbody>
         <tr ng-repeat="p in ProductsPage.content">
@@ -75,7 +77,9 @@
             <td>{{p.title}}</td>
             <td>{{p.price}}</td>
             <td>
-                <button class="btn btn-primary" ng-click="addToCart(p.id)">Добавить в корзину</button>
+                <button class="btn add-to-cart" ng-click="addToCart(p.id)">+</button>
+                <button class="btn decrease-product" ng-click="decreaseProduct(p.id)">-</button>
+                <button class="btn remove-from-cart" ng-click="removeProduct(p.id)">Убрать из корзины</button>
             </td>
         </tr>
         </tbody>
