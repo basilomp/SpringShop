@@ -14,9 +14,17 @@ public class OrderConverter {
 
     private final OrderItemConverter orderItemConverter;
 
-    public Order dtoToEntity(OrderDto orderDto) {
-        throw new UnsupportedOperationException();
-    }
+//    public Order dtoToEntity(OrderDto orderDto) {
+//        throw new UnsupportedOperationException();
+//    }
+
+//    public Order dtoToEntity(OrderDto orderDto) {
+//        Order order = new Order();
+//        order.setUser(order.getUser());
+//        order.setTotalPrice(order.getTotalPrice());
+//        order.setAddress(order.getAddress());
+//        return order;
+//    }
 
     public OrderDto entityToDto(Order order) {
         OrderDto out = new OrderDto();
