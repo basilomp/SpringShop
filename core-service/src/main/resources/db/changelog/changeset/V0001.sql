@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS orders
 );
 
 CREATE TABLE IF NOT EXISTS orders_items (
-    id BIGINT NOT NULL PRIMARY KEY,
     quantity INT NOT NULL ,
     order_id BIGINT NOT NULL REFERENCES orders(id),
     product_id BIGINT NOT NULL REFERENCES products(id),
