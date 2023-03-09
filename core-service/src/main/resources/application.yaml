@@ -10,6 +10,9 @@ spring:
     password: Qwe123
     hikari:
       schema: cart_schema
+  liquibase:
+    change-log: db/changelog/db.changelog-master.xml
+    enabled: true
   jpa:
     show-sql: true
     database: POSTGRESQL
