@@ -14,5 +14,3 @@ spring:
     user:
       expire-time: 100
       name: "Cart"
-  liquibase:
-    enabled: false

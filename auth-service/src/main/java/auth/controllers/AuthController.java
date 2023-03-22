@@ -1,11 +1,10 @@
 package auth.controllers;
 
-import auth.exceptions.AppError;
+import auth.AppError;
 import auth.dto.JwtRequest;
 import auth.dto.JwtResponse;
 import auth.services.UserService;
 import auth.utils.JwtTokenUtil;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "AuthController", description = "Controller authorization")
 public class AuthController {
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
