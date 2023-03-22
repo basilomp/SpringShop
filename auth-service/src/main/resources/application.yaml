@@ -1,37 +1,26 @@
 server:
   port: 8188
   servlet:
-    context-path: /auth
+    context-path: /web-market-auth
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/spring_shop
+    url: jdbc:postgresql://localhost:5432/shop_new
     username: postgres
-    password: Qwe123
-    hikari:
-      schema: user_schema
-  liquibase:
-    change-log: db/changelog/db.changelog-master.xml
-    enabled: true
+    password: root
   jpa:
     show-sql: true
     database: POSTGRESQL
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: create-drop
   sql:
     init:
       platform: postgres
 jwt:
   secret: h4f8093h4f983yhrt9834hr0934hf0hf493g493gf438rh438th34g34g
   lifetime: 360000000
-eureka:
-  instance:
-    hostname: auth-service
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://discovery:8700/eureka}
-      fetchRegistry: false
 #other:
 #  cache:
 #    cart: "Cart"
