@@ -5,9 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import spring.shop.dto.Cart;
 import spring.shop.dto.OrderDetailsDto;
+import spring.shop.dto.OrderDto;
 import spring.shop.entities.Order;
 import spring.shop.entities.OrderItem;
 import spring.shop.exceptions.ResourceNotFoundException;
+import spring.shop.mappers.OrderMapper;
+import spring.shop.mappers.ProductMapper;
 import spring.shop.repositories.OrderRepository;
 
 import java.util.ArrayList;
@@ -20,7 +23,9 @@ public class OrderService {
 
     private final ProductsService productsService;
     private final OrderRepository orderRepository;
+    private final OrderMapper orderMapper;
     private final RestTemplate cartTemplate;
+    private final ProductMapper productMapper;
 
     public void createOrder(String username, OrderDetailsDto orderDetailsDto, String cartName) {
         Order order = new Order();
@@ -35,7 +40,7 @@ public class OrderService {
             orderItem.setOrder(order);
             orderItem.setQuantity(o.getQuantity());
             orderItem.setPricePerProduct(o.getPricePerProduct());
-            orderItem.setProduct(productsService.findById(o.getProductId()).orElseThrow(() -> new ResourceNotFoundException("Product not found,")));
+            orderItem.setProduct(productMapper.toEntity(productsService.findById(o.getProductId())));
             return orderItem;
         }).collect(Collectors.toList());
         order.setItems(items);
@@ -43,9 +48,9 @@ public class OrderService {
         currentCart.clear();
 
     }
-    public List<Order> findOrdersByUsername(String username) {
+    public List<OrderDto> findOrdersByUsername(String username) {
         try {
-            return orderRepository.findByUsername(username);
+            return orderRepository.findByUsername(username).stream().map(orderMapper::toDto).collect(Collectors.toList());
         } catch (Exception e) {
             return new ArrayList<>();
         }
