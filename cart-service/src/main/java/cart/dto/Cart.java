@@ -3,6 +3,7 @@ package cart.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.cache.CacheManager;
+import spring.shop.entities.Product;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package auth.exceptions;
+package auth;
 
 public class AppError {
     private int statusCode;
