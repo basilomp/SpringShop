@@ -1,5 +1,7 @@
 package spring.shop.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
 import org.springframework.cache.CacheManager;
 import spring.shop.entities.Product;
@@ -11,7 +13,10 @@ import java.util.List;
 @Data
 public class Cart {
 
+    @Schema(description = "List of items in a cart")
     private List<OrderItemDto> items;
+
+    @Schema(description = "Total price of items in a cart")
     private  int totalPrice;
 
     public Cart() {

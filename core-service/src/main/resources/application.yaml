@@ -5,9 +5,14 @@ server:
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/shop_new
+    url: jdbc:postgresql://localhost:5432/spring_shop
     username: postgres
-    password: root
+    password: Qwe123
+    hikari:
+      schema: cart_schema
+  liquibase:
+    change-log: db/changelog/db.changelog-master.xml
+    enabled: true
   jpa:
     show-sql: true
     database: POSTGRESQL
@@ -30,6 +35,13 @@ spring:
     user:
       expire-time: 700000000
       name: Cart
+  eureka:
+    instance:
+      hostname: ticket-service
+    client:
+      serviceUrl:
+        defaultZone: ${EUREKA_URI:http://discovery:8700/eureka}
+        fetchRegistry: false
 #other:
 #  cache:
 #    cart: "Cart"
