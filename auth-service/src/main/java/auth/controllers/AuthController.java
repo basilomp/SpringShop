@@ -1,6 +1,6 @@
 package auth.controllers;
 
-import auth.AppError;
+import auth.exceptions.AppError;
 import auth.dto.JwtRequest;
 import auth.dto.JwtResponse;
 import auth.services.UserService;
