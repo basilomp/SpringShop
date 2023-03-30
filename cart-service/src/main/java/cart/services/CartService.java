@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import spring.shop.entities.Product;
 import spring.shop.exceptions.ResourceNotFoundException;
 import spring.shop.services.ProductsService;
+import spring.shop.validators.ProductValidator;
 
 
 import java.util.Optional;
@@ -20,6 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CartService {
     private final ProductsService productsService;
+    private final ProductValidator productValidator;
     private final CacheManager cacheManager;
     private final RestTemplate restTemplate;
 
@@ -52,17 +54,15 @@ public class CartService {
 
     @CachePut(value = "Cart", key = "#cartName")
     public void decreaseProductByIdInCart(Long id, String cartName) {
-        Product product = productsService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Не удалось " +
-                "найти продукт"));
+        productValidator.validate(productsService.findById(id));
         Cart cart = getCurrentCart(cartName);
-        cart.decreaseProduct(product.getId());
+        cart.decreaseProduct(id);
         cacheManager.getCache("Cart").put(cartName, cart);
     }
 
     @CachePut(value = "Cart", key = "#cartName")
     public void removeProductFromCart(Long id, String cartName) {
-        Product product = productsService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Не удалось " +
-                "найти продукт"));
+        productValidator.validate(productsService.findById(id));
         Cart cart = getCurrentCart(cartName);
         cart.removeProduct(id);
         cacheManager.getCache("Cart").put(cartName, cart);

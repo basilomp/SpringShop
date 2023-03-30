@@ -1,11 +1,13 @@
 package spring.shop.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@Builder
 public class OrderDto {
 
     @Schema(description = "Id of an order")
@@ -25,5 +27,7 @@ public class OrderDto {
 
     @Schema(description = "Recipient's phone number")
     private String phone;
+
+
 }
 
