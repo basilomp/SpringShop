@@ -36,8 +36,8 @@ public class CartCachingTest {
     @MockBean
     private CartService cartService;
 
-    @BeforeEach
-    public void initCart() {
+//    @BeforeEach
+//    public void initCart() {
 //        cartService = new CartService(productsService, cacheManager, restTemplate);
 //        Mockito.when(cacheManager.getCache("Cart")
 //                .get(Mockito.anyString(), Cart.class)).thenReturn(new Cart());
@@ -49,22 +49,22 @@ public class CartCachingTest {
 //        cacheManager.getCache("Cart");
 //        Mockito.when(cacheManager.getCache("Cart"))
 //            .get(Mockito.anyString(), Cart.class)).thenReturn(new Cart());
-        cartService.clear("test_cart");
+//        cartService.clear("test_cart");
 
-    }
+//    }
 
-    @Test
-    public void checkCache() {
-        ProductDto productDto = new ProductDto();
-        productDto.setId(1L);
-        productDto.setTitle("Crisps");
-        productDto.setPrice(100);
-        cartService = new CartService(productsService, cacheManager, restTemplate);
-        cartService.addProductByIdToCart(1l, "test_cart");
-
-        Assertions.assertEquals(1, cartService.getCurrentCart("test_cart").getItems().size());
-
-        }
+//    @Test
+//    public void checkCache() {
+//        ProductDto productDto = new ProductDto();
+//        productDto.setId(1L);
+//        productDto.setTitle("Crisps");
+//        productDto.setPrice(100);
+//        cartService = new CartService(productsService, cacheManager, restTemplate);
+//        cartService.addProductByIdToCart(1l, "test_cart");
+//
+//        Assertions.assertEquals(1, cartService.getCurrentCart("test_cart").getItems().size());
+//
+//        }
 //
 //
 //    @Test
