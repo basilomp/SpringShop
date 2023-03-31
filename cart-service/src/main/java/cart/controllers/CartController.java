@@ -33,14 +33,12 @@ public class CartController {
         service.getCurrentCart(cartName).clear();
     }
 
-    //Метод для уменьшения количества
     @PostMapping("/decrease/{id}")
     @Operation(summary = "Decrease the quantity of a product in a cart by 1")
     public void decreaseProductInCart(@PathVariable Long id, @RequestBody String cartName) {
         service.decreaseProductByIdInCart(id, cartName);
     }
 
-    //Метод для полного удаления позиции из корзины
     @PostMapping("/remove/{id}")
     @Operation(summary = "Method for removing a product from a cart")
     public void removeProductFromCart(@PathVariable Long id, @RequestBody String cartName) {
